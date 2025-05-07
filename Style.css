@@ -1,0 +1,76 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
+
+body, html{
+    height: 100%;
+    margin: 0;
+    background-image: url(vacinaPhoto.webp);
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* centraliza na horizontal */
+    align-items: center;     /* centraliza na vertical */
+    height: 100vh;           /* ocupa toda a altura da tela */
+    background-image: url(1600w-pmqy1JflyBc.webp);
+
+  }
+  .quadro {
+    background-color:#f0f8ff;
+    height: 95%;
+    padding-left: 20%;
+    padding-right: 20%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 300px;
+    text-align: center;
+  }
+  
+  header h1{
+    width: 380px;
+    padding-top: 20px;
+    padding-bottom: 20px;    
+  }
+  #caixaIdade div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    gap: 10px; 
+    padding: 50px;
+    width: 80%;
+
+  }
+
+  #caixaIdade div label{
+    font-size:x-large;
+    
+  }
+
+  #caixaIdade div input{
+        padding: 8px;
+        border-radius: 5px;
+        width: 90%;
+        font-size: large;
+        background-color: #ffffff;
+  }
+
+  #caixaIdade div button{
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: large;
+    background-color: #357ABD;
+    color: #ffffff;
+    font-weight: 600;
+    border-color: #0b3768;
+    
+  }
+
+  button:hover{
+    cursor: pointer;
+
+  }
