@@ -40,8 +40,9 @@ body, html{
     flex-direction: column;
     align-items: flex-start; 
     gap: 10px; 
-    padding: 50px;
+    padding: 30px;
     width: 80%;
+
 
   }
 
@@ -58,7 +59,7 @@ body, html{
         background-color: #ffffff;
   }
 
-  #caixaIdade div button{
+  #caixaIdade  button{
     padding: 10px;
     border-radius: 5px;
     width: 100%;
@@ -67,10 +68,30 @@ body, html{
     color: #ffffff;
     font-weight: 600;
     border-color: #0b3768;
+    margin-bottom: 15px;
     
   }
 
   button:hover{
     cursor: pointer;
 
+  }
+   div #radio{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+
+
+  }
+
+  div #radio label{
+    display: flex;
+    align-items: center;
+    display: flex;
+    gap: 5px;
+    font-size: 1.4em;
+    font-family: monospace;
+    
   }
