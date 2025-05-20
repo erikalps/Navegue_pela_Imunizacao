@@ -95,3 +95,46 @@ body, html{
     font-family: monospace;
     
   }
+
+  .resultado-scroll {
+      max-height:50%;
+      overflow-y: scroll;
+    
+  /* Esconde a barra no Chrome, Edge e Safari */
+  .resultado-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari e Edge */
+  }
+
+    }
+  
+  .resultado-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari e Edge */
+  }
+  
+
+  /* html no js*/
+  .vacina-bloco{
+    background-color: #fafcfd;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    box-shadow: 2px 2px 6px #151627;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+
+  .txt-idade{
+    font-size: large;
+    font-weight: 700;
+    padding: 10px;
+    background-color: #a9c0da;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  .vacinas{
+    display: flex;
+    flex-direction: row;
+    font-size: 1.2em;
+  }
