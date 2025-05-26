@@ -31,7 +31,8 @@ function verificarVacinas(){
         if (vacinas && vacinas.length > 0) {
             let resultado = `<div class="txt-idade">${i} ${tipoIdade === "mes" ? "meses" : "anos"} </div>`
             vacinas.forEach(vacina => {
-                resultado += `  <div class ="vacinas"> ${todasvacinas[vacina] || vacina}</div><br>`
+                resultado += `  <div class="vacinas"> <button onclick="maisInformacoes('${vacina}')">${todasvacinas[vacina] || vacina}</button></div><br>`
+
             });
 
             res.innerHTML += `<div class ="vacina-bloco">${resultado}</div>`
@@ -41,12 +42,25 @@ function verificarVacinas(){
     
 }
 
+
+
+function maisInformacoes(nomeVacina){
+   const info = infoVacinas[nomeVacina] 
+
+   document.getElementById("infoVac").innerHTML = `
+        <h2 class ="titulo_info">${nomeVacina}</h2>
+        <p class ="vacina_info">${info}</p>
+    `;
+
+  document.getElementById("sidebar").classList.add("ativa");
    
-    
+}  
   
 
 
-
+function fecharSidebar() {
+    document.getElementById("sidebar").classList.remove("ativa");
+}
 
 /* todas as vacinas*/
 
@@ -106,4 +120,44 @@ const vacinasPorIdade = {
   };
   
     
+/*informações sobre as vacinas */
+const infoVacinas = {
+    bcg: "Protege contra formas graves de tuberculose, como a meningite tuberculosa e a tuberculose miliar.",
+    hepB: "Previne a hepatite B. A primeira dose deve ser administrada logo após o nascimento.",
+    pentavalente1: "Combina cinco vacinas em uma: difteria, tétano, coqueluche, hepatite B e Haemophilus influenzae tipo b.",
+    pentavalente2: "Segunda dose da vacina pentavalente, reforçando a imunização contra cinco doenças.",
+    pentavalente3: "Terceira dose da vacina pentavalente, essencial para completar o esquema vacinal.",
+    poliomelite1: "Primeira dose da vacina contra poliomielite (VIP - inativada).",
+    poliomelite2: "Segunda dose da vacina contra poliomielite.",
+    poliomelite3: "Terceira dose da vacina contra poliomielite.",
+    poliomieliteRef1: "Primeiro reforço da vacina contra poliomielite (VOP - oral).",
+    poliomieliteRef2: "Segundo reforço da vacina contra poliomielite (VOP - oral).",
+    meningococicaC1: "Primeira dose da vacina contra meningite causada pelo meningococo C.",
+    meningococicaC2: "Segunda dose da vacina meningocócica C.",
+    meningococicaRef: "Reforço da vacina meningocócica C, essencial para proteção prolongada.",
+    pneumo1: "Primeira dose da vacina pneumocócica 10-valente, que protege contra pneumonia, otite e meningite.",
+    pneumo2: "Segunda dose da vacina pneumocócica 10-valente.",
+    pneumoRef: "Reforço da vacina pneumocócica 10-valente.",
+    rotavirus1: "Primeira dose da vacina oral contra o rotavírus, que causa diarreias graves em bebês.",
+    rotavirus2: "Segunda dose da vacina oral contra o rotavírus.",
+    tripliceViral1: "Primeira dose da vacina tríplice viral, que protege contra sarampo, caxumba e rubéola.",
+    tripliceViral2: "Segunda dose da tríplice viral, garantindo proteção completa contra as três doenças.",
+    hepA: "Previne a hepatite A, uma infecção viral que afeta o fígado.",
+    tetrasViral: "Combina a tríplice viral com a vacina contra varicela (catapora).",
+    dT: "Dupla adulto: protege contra difteria e tétano. Indicada para reforço na vida adulta.",
+    febreAmarela: "Previne a febre amarela, doença grave transmitida por mosquitos.",
+    hpvMeninas: "Protege contra o papilomavírus humano (HPV), principal causa do câncer de colo do útero.",
+    hpvMeninos: "Protege contra o papilomavírus humano (HPV), prevenindo cânceres e verrugas genitais.",
+    meningococicaACWY: "Vacina contra meningite causada pelos meningococos dos sorogrupos A, C, W e Y.",
+    dTPreforco: "Reforço da DTP: protege contra difteria, tétano e coqueluche.",
+    influenza: "Vacina anual contra a gripe (influenza), recomendada especialmente para grupos de risco.",
+    trivalente: "Reforço da tríplice viral (sarampo, caxumba e rubéola).",
+    hepatiteB: "Reforço da vacina contra hepatite B para manter a proteção na vida adulta.",
+    dTadul: "Reforço da vacina dupla adulto: difteria e tétano.",
+    pneumococica65: "Protege idosos contra doenças pneumocócicas, como pneumonia, meningite e otite.",
+    gripe60: "Dose extra da vacina contra influenza para idosos a partir de 60 anos.",
+    covid: "Protege contra a COVID-19. Pode haver necessidade de reforços conforme a orientação vigente.",
+    varicela: "Previne a catapora, uma doença altamente contagiosa causada pelo vírus varicela-zoster."
+  };
+  
 
