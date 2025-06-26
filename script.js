@@ -26,20 +26,27 @@ function verificarVacinas(){
     }
     
     
-    for(let i = 0; i <= valor; i++){
-        let vacinas = vacinasPorIdade[i]
-        if (vacinas && vacinas.length > 0) {
-            let resultado = `<div class="txt-idade">${i} ${tipoIdade === "mes" ? "meses" : "anos"} </div>`
-            vacinas.forEach(vacina => {
-                resultado += `  <div class="vacinas"> <button onclick="maisInformacoes('${vacina}')">${todasvacinas[vacina] || vacina}</button></div><br>`
+    for (let idadeKey in vacinasPorIdade) {
+      let tipo = idadeKey.endsWith("m") ? "mes" : "ano";
+      let numero = parseInt(idadeKey);
 
-            });
+      if (
+        (tipoIdade === "mes" && tipo === "mes" && numero <= valor) ||
+        (tipoIdade === "ano" && tipo === "ano" && numero <= valor)) {
+          let label = `${numero} ${tipo === "mes" ? (numero > 1 ? "meses" : "mês") : (numero > 1 ? "anos" : "ano")}`;
+          let vacinas = vacinasPorIdade[idadeKey];
+          let resultado = `<div class="txt-idade">${label}</div>`;
 
-            res.innerHTML += `<div class ="vacina-bloco">${resultado}</div>`
-     }
-     }
-    }   
+          vacinas.forEach(vacina => {
+            resultado += `<div class="vacinas"><button onclick="maisInformacoes('${vacina}')">${todasvacinas[vacina] || vacina}</button></div><br>`;
+          });
+
+          res.innerHTML += `<div class="vacina-bloco">${resultado}</div>`;
+      }
+    }
+  
     
+    }
 }
 
 
@@ -52,14 +59,14 @@ function maisInformacoes(nomeVacina){
         <p class ="vacina_info">${info}</p>
     `;
 
-  document.getElementById("sidebar").classList.add("ativa");
+  document.getElementById("sidebar").classList.add("active");
    
 }  
   
 
 
 function fecharSidebar() {
-    document.getElementById("sidebar").classList.remove("ativa");
+    document.getElementById("sidebar").classList.remove("active");
 }
 
 /* todas as vacinas*/
@@ -105,59 +112,94 @@ const todasvacinas = {
 
 
 const vacinasPorIdade = {
-    0: ["bcg", "hepB"], // Recém-nascidos
-    2: ["pentavalente1", "poliomielite1", "pneumo1", "rotavirus1"], // 2 meses
-    4: ["pentavalente2", "poliomielite2", "pneumo2", "rotavirus2"], // 4 meses
-    6: ["pentavalente3", "poliomielite3", "influenza"], // 6 meses
-    12: ["tripliceViral1", "pneumoRef", "meningococicaRef"], // 12 meses
-    15: ["dTPreforco", "poliomieliteRef1", "hepA", "tetrasViral"], // 15 meses
-    4: ["dTPreforco", "poliomieliteRef2", "varicela"], // 4 a 6 anos
-    9: ["hpvMeninas", "hpvMeninos"], // 9 anos
-    11: ["meningococicaACWY", "hepB", "febreAmarela"], // 11 a 14 anos
-    18: ["trivalente", "hepB", "dTadul", "febreAmarela"], // Adultos
-    60: ["influenza", "pneumococica65", "gripe60"], // Idosos a partir de 60 anos
-    65: ["pneumococica65", "gripe60", "covid"], // Idosos maiores de 65 anos
-  };
+  "0m": ["bcg", "hepB"],
+  "2m": ["pentavalente1", "poliomelite1", "pneumo1", "rotavirus1"],
+  "4m": ["pentavalente2", "poliomelite2", "pneumo2", "rotavirus2"],
+  "6m": ["pentavalente3", "poliomelite3", "influenza"],
+  "12m": ["tripliceViral1", "pneumoRef", "meningococicaRef"],
+  "15m": ["dTPreforco", "poliomieliteRef1", "hepA", "tetrasViral", "varicela"],
+  "4a": ["dTPreforco", "poliomieliteRef2", "varicela"],
+  "9a": ["hpvMeninas", "hpvMeninos"],
+  "11a": ["meningococicaACWY", "hepB", "febreAmarela"],
+  "18a": ["trivalente", "hepB", "dTadul", "febreAmarela"],
+  "60a": ["influenza", "pneumococica65", "gripe60"],
+  "65a": ["pneumococica65", "gripe60", "covid"]
+};
   
     
 /*informações sobre as vacinas */
 const infoVacinas = {
-    bcg: "Protege contra formas graves de tuberculose, como a meningite tuberculosa e a tuberculose miliar.",
-    hepB: "Previne a hepatite B. A primeira dose deve ser administrada logo após o nascimento.",
-    pentavalente1: "Combina cinco vacinas em uma: difteria, tétano, coqueluche, hepatite B e Haemophilus influenzae tipo b.",
-    pentavalente2: "Segunda dose da vacina pentavalente, reforçando a imunização contra cinco doenças.",
-    pentavalente3: "Terceira dose da vacina pentavalente, essencial para completar o esquema vacinal.",
-    poliomelite1: "Primeira dose da vacina contra poliomielite (VIP - inativada).",
-    poliomelite2: "Segunda dose da vacina contra poliomielite.",
-    poliomelite3: "Terceira dose da vacina contra poliomielite.",
-    poliomieliteRef1: "Primeiro reforço da vacina contra poliomielite (VOP - oral).",
-    poliomieliteRef2: "Segundo reforço da vacina contra poliomielite (VOP - oral).",
-    meningococicaC1: "Primeira dose da vacina contra meningite causada pelo meningococo C.",
-    meningococicaC2: "Segunda dose da vacina meningocócica C.",
-    meningococicaRef: "Reforço da vacina meningocócica C, essencial para proteção prolongada.",
-    pneumo1: "Primeira dose da vacina pneumocócica 10-valente, que protege contra pneumonia, otite e meningite.",
-    pneumo2: "Segunda dose da vacina pneumocócica 10-valente.",
-    pneumoRef: "Reforço da vacina pneumocócica 10-valente.",
-    rotavirus1: "Primeira dose da vacina oral contra o rotavírus, que causa diarreias graves em bebês.",
-    rotavirus2: "Segunda dose da vacina oral contra o rotavírus.",
-    tripliceViral1: "Primeira dose da vacina tríplice viral, que protege contra sarampo, caxumba e rubéola.",
-    tripliceViral2: "Segunda dose da tríplice viral, garantindo proteção completa contra as três doenças.",
-    hepA: "Previne a hepatite A, uma infecção viral que afeta o fígado.",
-    tetrasViral: "Combina a tríplice viral com a vacina contra varicela (catapora).",
-    dT: "Dupla adulto: protege contra difteria e tétano. Indicada para reforço na vida adulta.",
-    febreAmarela: "Previne a febre amarela, doença grave transmitida por mosquitos.",
-    hpvMeninas: "Protege contra o papilomavírus humano (HPV), principal causa do câncer de colo do útero.",
-    hpvMeninos: "Protege contra o papilomavírus humano (HPV), prevenindo cânceres e verrugas genitais.",
-    meningococicaACWY: "Vacina contra meningite causada pelos meningococos dos sorogrupos A, C, W e Y.",
-    dTPreforco: "Reforço da DTP: protege contra difteria, tétano e coqueluche.",
-    influenza: "Vacina anual contra a gripe (influenza), recomendada especialmente para grupos de risco.",
-    trivalente: "Reforço da tríplice viral (sarampo, caxumba e rubéola).",
-    hepatiteB: "Reforço da vacina contra hepatite B para manter a proteção na vida adulta.",
-    dTadul: "Reforço da vacina dupla adulto: difteria e tétano.",
-    pneumococica65: "Protege idosos contra doenças pneumocócicas, como pneumonia, meningite e otite.",
-    gripe60: "Dose extra da vacina contra influenza para idosos a partir de 60 anos.",
-    covid: "Protege contra a COVID-19. Pode haver necessidade de reforços conforme a orientação vigente.",
-    varicela: "Previne a catapora, uma doença altamente contagiosa causada pelo vírus varicela-zoster."
-  };
-  
+  bcg: "Protege contra formas graves de tuberculose, como a meningite tuberculosa e a tuberculose miliar. <div class='idade_indicada'>Idade: ao nascer até 4 anos, 11 meses e 29 dias</div> <div class='locais_disponivel'>Disponível nas Unidades Básicas de Saúde (UBS)</div>",
+
+  hepB: "Previne a hepatite B. <div class='idade_indicada'>Idade: ao nascer; pode ser tomada em qualquer idade se não vacinado</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  pentavalente1: "Combina vacinas contra difteria, tétano, coqueluche, hepatite B e Haemophilus influenzae tipo b. <div class='idade_indicada'>Idade: 2 meses</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  pentavalente2: "Segunda dose da vacina pentavalente. <div class='idade_indicada'>Idade: 4 meses</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  pentavalente3: "Terceira dose da vacina pentavalente. <div class='idade_indicada'>Idade: 6 meses</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  poliomelite1: "Vacina inativada poliomielite (VIP). <div class='idade_indicada'>Idade: 2 meses</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  poliomelite2: "VIP, segunda dose. <div class='idade_indicada'>Idade: 4 meses</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  poliomelite3: "VIP, terceira dose. <div class='idade_indicada'>Idade: 6 meses</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  poliomieliteRef1: "Primeiro reforço com vacina oral (VOP). <div class='idade_indicada'>Idade: 15 meses</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  poliomieliteRef2: "Segundo reforço com VOP. <div class='idade_indicada'>Idade: 4 anos</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  meningococicaC1: "Protege contra meningite meningocócica C. <div class='idade_indicada'>Idade: 3 meses</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  meningococicaC2: "Segunda dose. <div class='idade_indicada'>Idade: 5 meses</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  meningococicaRef: "Reforço da vacina meningocócica C. <div class='idade_indicada'>Idade: 12 meses (até 5 anos se necessário)</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  pneumo1: "Vacina pneumocócica 10-valente. <div class='idade_indicada'>Idade: 2 meses</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  pneumo2: "Segunda dose. <div class='idade_indicada'>Idade: 4 meses</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  pneumoRef: "Reforço da pneumocócica 10-valente. <div class='idade_indicada'>Idade: 12 meses</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  rotavirus1: "Vacina oral contra rotavírus. <div class='idade_indicada'>Idade: 2 meses (até 15 semanas)</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  rotavirus2: "Segunda dose oral. <div class='idade_indicada'>Idade: 4 meses (até 7 meses e 29 dias)</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  tripliceViral1: "Protege contra sarampo, caxumba e rubéola. <div class='idade_indicada'>Idade: 12 meses</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  tripliceViral2: "Segunda dose. <div class='idade_indicada'>Idade: 15 meses (até 4 anos, 11 meses e 29 dias)</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  hepA: "Previne hepatite A. <div class='idade_indicada'>Idade: 15 meses (até 5 anos incompletos)</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  tetrasViral: "Combina tríplice viral com varicela. <div class='idade_indicada'>Idade: 15 meses</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  dT: "Dupla adulto (difteria e tétano). <div class='idade_indicada'>Idade: reforço a cada 10 anos na vida adulta</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  febreAmarela: "Previne febre amarela. <div class='idade_indicada'>Idade: a partir de 9 meses</div> <div class='locais_disponivel'>Disponível nas UBS e campanhas regionais</div>",
+
+  hpvMeninas: "Previne HPV e câncer de colo do útero. <div class='idade_indicada'>Idade: 9 a 14 anos</div> <div class='locais_disponivel'>Disponível nas UBS e escolas</div>",
+
+  hpvMeninos: "Previne HPV e cânceres genitais. <div class='idade_indicada'>Idade: 11 a 14 anos</div> <div class='locais_disponivel'>Disponível nas UBS e escolas</div>",
+
+  meningococicaACWY: "Contra meningite dos tipos A, C, W e Y. <div class='idade_indicada'>Idade: 11 a 14 anos</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  dTPreforco: "Reforço da DTP. <div class='idade_indicada'>Idade: 15 meses (até 6 anos, 11 meses e 29 dias)</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  influenza: "Vacina anual contra gripe. <div class='idade_indicada'>Idade: a partir de 6 meses, grupos prioritários</div> <div class='locais_disponivel'>Disponível nas UBS durante campanhas</div>",
+
+  trivalente: "Reforço da tríplice viral. <div class='idade_indicada'>Idade: crianças, adolescentes e adultos não vacinados</div> <div class='locais_disponivel'>Disponível nas UBS e campanhas</div>",
+
+  hepatiteB: "Reforço ou início de esquema. <div class='idade_indicada'>Idade: qualquer idade</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  dTadul: "Dupla adulto (difteria e tétano). <div class='idade_indicada'>Idade: reforço a cada 10 anos</div> <div class='locais_disponivel'>Disponível nas UBS</div>",
+
+  pneumococica65: "Protege idosos contra doenças pneumocócicas. <div class='idade_indicada'>Idade: a partir de 60 anos</div> <div class='locais_disponivel'>Disponível nas UBS em campanhas</div>",
+
+  gripe60: "Dose extra anual contra influenza. <div class='idade_indicada'>Idade: a partir de 60 anos</div> <div class='locais_disponivel'>Disponível nas UBS durante campanhas</div>",
+
+  covid: "Protege contra a COVID-19. <div class='idade_indicada'>Idade: conforme orientações vigentes</div> <div class='locais_disponivel'>Disponível nas UBS e centros de vacinação</div>",
+
+  varicela: "Previne catapora. <div class='idade_indicada'>Idade: 15 meses (ou qualquer idade se não vacinado)</div> <div class='locais_disponivel'>Disponível nas UBS</div>"
+};
+
 

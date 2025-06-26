@@ -7,42 +7,33 @@
     <link rel="stylesheet" href="Style.css">
 </head>
 <body>
-    
-    <div class="container">
-        <div class="quadro">
-            <header><h1>Navegue pela Imunização</h1></header>
-            <section id="caixaIdade">
-                <div>
-                    <label for="idade">Digite sua idade:</label>
-                    <input type="number" id="idade" name="idade" min="0" required>
-                </div>
+    <header><h1>Navegue pela Imunização</h1></header>
+
+     <section id="caixaIdade">
+       <div class="input-idade">
+            <input type="number" id="idade" name="idade" min="0" required placeholder="Digite sua idade"> 
                     
-                    <div id="radio">
-                        <label for="meses">   Meses
-                            <input type="radio" id="meses" name="mes_ano" value="mes">
-                        </label>
+          <div class="radio">
+             <label for="meses">   Meses
+               <input type="radio" id="meses" name="mes_ano" value="mes">
+            </label>
                     
-                        <label for="anos">  Anos
-                            <input type="radio" id="anos" name="mes_ano" value="ano">
-                        </label>
-                       
-                   
-                    </div> <!--radio-->
-                    
-                    <button type="button" id="verificar" onclick="verificarVacinas()">Verificar Vacinas</button>
-                 
-                  
-                
-            </section>
+            <label for="anos">  Anos
+               <input type="radio" id="anos" name="mes_ano" value="ano">
+             </label>
+          </div> <!--radio-->
+            <button type="button" id="verificar" onclick="verificarVacinas()">Verificar Vacinas</button>
+       </div> <!--input-idade-->
+     </section> <!--caixa-idade-->
             
-                <div id="res" class="resultado-scroll"></div>
+    <div id="res" class="resultado-scroll"></div>
 
-                <div id="sidebar" class="sidebar">
-                    <div id="infoVac"></div>
-                    <button onclick="fecharSidebar()">Fechar</button>
-                </div>
-
-    </div> <!--container-->
+     <div id="sidebar" class="sidebar">
+          <div id="infoVac"></div>
+                <button onclick="fecharSidebar()">Fechar</button>
+         
+           </div>
+        </div>
 
 <script src="script.js"></script>
 </body>

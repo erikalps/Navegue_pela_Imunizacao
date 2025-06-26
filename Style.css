@@ -1,186 +1,187 @@
-*{
-    padding: 0;
-    margin: 0;
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
-
-body, html{
-    height: 100%;
-    margin: 0;
+/* Fundo geral com gradiente verde suave */
+body {
+  background-image: url(background.png);
+  color: #2f4f4f;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.container {
-    display: flex;
-    justify-content: center; /* centraliza na horizontal */
-    align-items: center;     /* centraliza na vertical */
-    height: 100vh;           /* ocupa toda a altura da tela */
-    background-image: url(background.png);
+/* Cabeçalho */
+header {
+  color: #000;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+}
 
-  }
-  .quadro {
-    background-color:#f1c994;
-    height: 95%;
-    padding-left: 20%;
-    padding-right: 20%;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: 300px;
-    text-align: center;
-  }
+header h1 {
+  font-size: 2.5em;
+}
+
+/* Seção da idade */
+#caixaIdade {
+  background-color: #ffffffcc;
+  margin-top: 40px;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px;
+}
+
+/* Input + botão */
+.input-idade {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Estilo do input de idade */
+.input-idade input[type="number"] {
+  padding: 10px;
+  font-size: 1.1em;
+  border: 2px solid #87c788;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-idade input[type="number"]:focus {
+  border-color: #3aa66c;
+}
+
+/* Radios (meses/anos) */
+.radio {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1em;
+  color: #2f4f4f;
+}
+
+.radio input[type="radio"] {
+  margin-left: 8px;
+}
+
+/* Botão */
+#verificar {
+  background-color: #3aa66c;
+  color: white;
+  border: none;
+  padding: 18px;
+  font-size: 1.1em;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#verificar:hover {
+  background-color: #2d8c59;
+}
+
+/* Resultado */
+#res.resultado-scroll {
+  margin-top: 30px;
+  background-color: #fff7f7cc;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 400px;
+  height: 100%;
+  background-image: url(background_side.png);
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+  overflow-y: auto;
+  color:#000;
   
-  header h1{
-    width: 380px;
-    padding-top: 20px;
-    padding-bottom: 20px;   
-   
-  }
-  #caixaIdade div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; 
-    gap: 5px; 
-    padding: 5px;
-    width: 80%;
+}
 
+.sidebar.active {
+  right: 0;
+}
 
-  }
+.sidebar button {
+  background-color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  border: none;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 30%;
+}
 
-  #caixaIdade div label{
-    font-size:x-large;
-    
-  }
+.sidebar button:hover {
+  background-color: #2d8c59;
+}
 
-  #caixaIdade div input{
-        padding: 8px;
-        border-radius: 5px;
-        width: 90%;
-        font-size: large;
-        background-color: #ffffff;
-  }
+.sidebar h2{
+  padding: 10px;
+  margin-bottom: 10px;
+}
 
-  #caixaIdade  button{
-    padding: 10px;
-    border-radius: 5px;
-    width: 100%;
-    font-size: large;
-    background-color: #72A16E;
-    font-weight: 600;
-    border-style: none;
-    margin-bottom: 15px;
-    
-  }
+.sidebar p{
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  line-height: 1.6;
 
-  button:hover{
-    cursor: pointer;
+}
 
-  }
-   div #radio{
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 10px;
+/*elementos das informações do hyml*/
 
+.txt-idade{
+  margin-top:10px;
+  padding: 10px;
+  color: #000;
+  font-weight:600;
+  font-size: 1.4em;
+}
 
-  }
+.vacinas button{
+  padding: 8px;
+  border-radius: 15px;
+  cursor: pointer;
+  border-style: none;
+  background-color: #fff;
+  font-size: 1.2em;
+  transition: 1s;
+}
 
-  div #radio label{
-    display: flex;
-    align-items: center;
-    display: flex;
-    gap: 5px;
-    font-size: 1.4em;
-    font-family: monospace;
-    
-  }
+.vacinas button:hover{
+  background-color:#2f4f4f;
+}
 
-  .resultado-scroll {
-      max-height:50%;
-      overflow-y: scroll;
-    
-  /* Esconde a barra no Chrome, Edge e Safari */
-  .resultado-scroll::-webkit-scrollbar {
-    display: none; /* Chrome, Safari e Edge */
-  }
+.idade_indicada{
+  padding-top:8px;
+  padding-bottom: 5px;
+  letter-spacing: 1px;
+  line-height: 1.3;
+}
 
-    }
-  
-  .resultado-scroll::-webkit-scrollbar {
-    display: none; /* Chrome, Safari e Edge */
-  }
-  
-
-  /* html no js*/
-  .vacina-bloco{
-    background-color: #fafcfd;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 2px 2px 6px #F4A97D ;
-    margin-bottom: 10px;
-    margin-top: 10px;
-  }
-
-
-  .txt-idade{
-    font-size: large;
-    font-weight: 700;
-    padding: 10px;
-    background-color: #c4cfc2;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-
-  .vacinas button{
-    display: flex;
-    flex-direction: row;
-    font-size: 1em;
-    border: none;
-    padding:5px;
-    border-radius: 5px;
-    
-  }
-
-  .sidebar {
-    position: fixed;
-    top: 0;
-    right: -400px; /* Escondida inicialmente */
-    width: 300px;
-    height: 100%;
-    background-color: #f9f9f9;
-    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
-    padding: 20px;
-    transition: right 0.3s ease;
-    z-index: 1000;
-  }
-  
-  .sidebar.ativa {
-    right: 0;
-  }
-
-
-  .titulo_info{
-    padding: 10px;
-    font-size: 2rem;
-  }
-
-  .vacina_info{
-    padding: 10px;
-    font-size: 1.2em;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-  
-  .sidebar button{
-    padding: 10px;
-    width: 50%;
-    border-radius: 5px;
-    background-color:#72A16E;
-    font-weight: 700;
-    border-style: none;
-  }
-
-  h3{
-    font-size: 1.2rem;
-    color:#000;
-    font-weight: 400;
-  }
+.locais_disponivel{
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 1.6;
+}
